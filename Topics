@@ -1,0 +1,68 @@
+ssh config
+
+#vim /etc/hosts.allow   
+------last line
+ sshd:  *.domainX.example.com
+ 
+#vim /etc/hosts.deny
+
+
+
+
+PORT Forwarding
+
+#firewall-cmd --permanent  --add-rich-rule 'rule family=ipv4 source address=172.25.14.0/24 forward-port to-port=80 protocol=tcp port=5423'
+#firewall-cmd --reload
+
+----------man firewalld.richlanguage 
+
+
+
+user environment
+
+#vim /usr/local/bin/qstat
+
+#chmod +x /usr/local/bin/qstat
+#qstat
+
+
+
+
+
+
+IPV6 configuration
+
+#nmcli connection show
+#nmcli connection modify "System Eth0" ipv6.addresses "fddb:fe29:able:c0a8:14/64" ipv6.method static
+#nmcli connection up "System eth0"
+
+
+
+
+
+
+
+
+Link Aggregation (NIC bonding)
+
+#nmcli connection add type team con-name team1 ifname team1 config '{"runner": {"name": "activebackup"}}'
+#nmcli connection add 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
