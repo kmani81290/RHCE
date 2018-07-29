@@ -1,0 +1,4 @@
+nmcli connection modify "System eth0" ipv6.addressess fee.efe.ght.24/64 ipv6.method=static
+nmcli connection up "System eth0"
+
+
