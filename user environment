@@ -1,0 +1,8 @@
+vim /usr/local/bin/qstat
+
+ps 
+
+
+chmod +x /usr/local/bin/qstat
+
+qstat
