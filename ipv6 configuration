@@ -2,3 +2,4 @@ nmcli connection modify "System eth0" ipv6.addressess fee.efe.ght.24/64 ipv6.met
 nmcli connection up "System eth0"
 
 
+ping6 fe2.eed.erre.12
