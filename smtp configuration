@@ -1,0 +1,17 @@
+yum install postfix -y
+systemctl start postfix
+systemctl enable postfix
+firewall-cmd --permanent --add-service=smtp
+
+config:
+vim /etc/postfix/main.cf
+
+relayhost = [classroom.example.com]
+myorigin = example.com
+
+systemctl restart postfix
+
+
+mail -s test natasha@classroom.example.com
+
+mailq
