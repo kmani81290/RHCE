@@ -1,0 +1,11 @@
+link aggregation
+
+nmcli device
+
+nmcli connection add type team con-name team1 ifname team1 config '{"runner": {"name": "activebackup"}}' 
+nmcli connection add type team-slave con-name team1-slave1 ifname eno1 master team1
+nmcli connection add type team-slave con-name team1-slave2 ifname eno2 master team1
+nmcli connection modify "team1" ipv4.addressess 192.168.0.10 ipv4.method static
+nmcli connection up "team1"
+
+teamdctl team1 stat
