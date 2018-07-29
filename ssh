@@ -1,0 +1,10 @@
+vim /etc/hosts.allow
+
+last line
+sshd: *.server12.example.com
+
+
+vim /etc/host.deny
+
+last line
+sshd: *.22ilt.org
