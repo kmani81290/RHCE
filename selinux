@@ -1,0 +1,12 @@
+vim /etc/selinux.config
+
+change into enforcing
+
+
+getenforce
+
+change temporary
+
+setenforce 1 or 0
+
+
