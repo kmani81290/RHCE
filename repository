@@ -1,0 +1,12 @@
+[name]
+name=server.repo
+baseurl=http://example.com
+gpgcheck=0
+enabled=1
+
+
+yum repolist
+yum clean all
+yum list all
+
+
