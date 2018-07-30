@@ -1,0 +1,79 @@
+yum install samba samba-client -y
+systemctl start smb
+systemctl enable smb
+firewall-cmd --permanent --add-service={samba,samba-client}
+firewall-cmd --reload
+
+useradd susan
+smbpasswd -a susan
+
+mkdir /common
+chcon -t samba_share_t /common
+
+config:
+vim /etc/samba/smb.config
+
+change SMBGROUP
+
+laste line 
+
+[common]
+path = /common
+valid users = susan
+hosts allow = 172.25.12.
+
+
+systemctl restart smb
+testparm
+
+smbclinet -L 172.25.12.11 _U susan
+
+then create another directory
+
+mkdir /cloudshare
+useradd frank
+smbpasswd -a frank
+  redhat
+useradd martin
+smbpasswd -a martin
+  redhat
+  
+chcon -t samba_share_t /cloudshare
+chown -R frank /cloudshare
+ll -dZ /cloudshare
+
+config:
+
+vim /etc/samba/smb.conf
+
+lastline:
+
+[OPENGROUP]
+path = /cloudshare
+valid users = martin,frank
+write lists = frank
+hosts allow = 172.25.12.
+
+clinet side 
+mounting
+
+yum install samba-client cifs-utils -y
+
+
+mkdir /mnt/smbspace
+
+vim /root/user
+
+username=frank
+password=redhat
+
+vim /etc/fstab
+
+lastline
+
+//172.25.12.11/OPENGROUP /mnt/smbspace  cifs  multiuser,credentials=/root/user  0 0
+
+mount -a
+df -HT
+
+
