@@ -1,0 +1,72 @@
+yum install nfs-utils -y
+systemctl start nfs-server
+systemctl enable nfs-server
+firewall-cmd --permanent --add-services={nfs,mountd,rpc-bind}
+firewall-cmd --reload
+
+mkdir /common
+
+vim /etc/exports
+/common *.example.com(ro)
+
+exportfs -r
+
+systemctl restart nfs-server
+
+
+
+clientside
+
+mkdir /mnt/public
+
+showmount -e 172.25.12.11
+
+vim /etc/fstab
+
+lastline
+
+172.25.12.11:/common /mnt/public  nfs defaults 0 0
+mount -a 
+df -hT
+
+
+Secure NFS:
+
+server side
+
+download keyfile
+
+wget -O /etc/krb5.keytab url...
+
+mkdir -p /restricted/protected
+
+chwon -R ldapuser12 /restricted/protected
+
+systemctl start nfs-secure-server
+systemctl enable nfs-secure-server
+
+vim /etc/exports
+
+/restricted *.example.com(rw,sec=krb5p)
+exportfs -r
+
+systemctl restart nfs-secure-server
+              "3 times
+
+clientside:
+
+systemctl start nfs-secure
+ 
+ mkdir /mnt/secure
+ wget -O /etc/krb5.keytab url...
+ 
+ vim /etc/fstab
+ 172.25.12.11:/restricted /mnt/secure nfs defaults,sec=krb5p  0 0
+ mount -a
+ df -hT
+ 
+ 
+ ssh - ldapuser12
+ password=kerberos
+ cd /mnt/secure
+ 
