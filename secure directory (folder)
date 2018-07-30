@@ -1,0 +1,22 @@
+mkdir /var/www/html/owndir
+cd owndir
+wget -O index.html url...
+
+vim /etc/httpd/conf/httpd.conf
+
+last line
+
+below </directory>
+<directory /var/www/html/owndir>
+oreder allow,deny
+allow from server12.example.com
+deny from all
+</directory>
+
+httpd -t
+systemctl restart httpd
+
+go to:
+
+http://server12.example.com/owndir
+
