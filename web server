@@ -1,0 +1,66 @@
+yum install httpd mod_ssl mod_wsgi -y
+systemctl start httpd
+systemctl enable httpd
+firewall-cmd --permanent --add-services={http,https}
+firewall-cmd --reload
+
+cd /var/www/html
+wget -O index.html url...
+vim /etc/httpd/conf/httpd.conf
+
+lastline
+
+<virtualhost 172.25.12.11:80>
+servername server12.example.com
+documentroot /var/www/html
+<directory /var/www/html>
+order allow,deny
+allow from *.example.com
+deny from *.my22ilt.org
+</directory>
+</virtualhost>
+
+httpd -t
+systemctl restart httpd
+           "3 times
+           
+           
+  
+  
+  
+  
+ secure webserver (https)
+ 
+ cd /etc/pki/tls/cert
+ wget url..
+ 
+ get 2 cert file 
+ 
+ cd ..
+ cd priv
+ 
+ wget url...   ; 1 privat download
+ 
+ 
+ vi /etc/httpd/conf.d/ssl.conf
+ 
+ 
+ line 56
+ <virtualhost *:556>
+ uncommect documentroot
+ servername server12.example.com:443
+ 
+ line 100
+ local host change into server12.crt & uncommnet
+
+ Line 107
+ change server12
+ 
+ L:122
+ uncomment
+ crt file
+ 
+ 
+ httpd -t
+ systemctl restart httpd
+ 
